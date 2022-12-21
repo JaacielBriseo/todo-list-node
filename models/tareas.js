@@ -1,4 +1,5 @@
 const Tarea = require('./tarea');
+require('colors');
 class Tareas {
 	_listado = {};
 	get listadoArr() {
@@ -19,6 +20,13 @@ class Tareas {
 	crearTarea(desc = '') {
 		const tarea = new Tarea(desc);
 		this._listado[tarea.id] = tarea;
+	}
+	listadoCompleto() {
+		console.log('')
+		this.listadoArr.map(({ desc, completadoEn }, index) => {
+			const idx = `${index + 1}`.green;
+			console.log(`${idx} ${desc} :: ${completadoEn === null ? `${'Pendiente'}`.red : `${'Completada'}`.green}`);
+		});
 	}
 }
 module.exports = Tareas;
