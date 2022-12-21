@@ -22,10 +22,35 @@ class Tareas {
 		this._listado[tarea.id] = tarea;
 	}
 	listadoCompleto() {
-		console.log('')
+		console.log('');
 		this.listadoArr.map(({ desc, completadoEn }, index) => {
 			const idx = `${index + 1}`.green;
 			console.log(`${idx} ${desc} :: ${completadoEn === null ? `${'Pendiente'}`.red : `${'Completada'}`.green}`);
+		});
+	}
+	listarPendientesCompletadas(completadas = true) {
+		console.log('');
+		let contador = 0;
+		this.listadoArr.map(({ completadoEn, desc }) => {
+			if (completadas) {
+				if (completadoEn) {
+					contador += 1;
+					console.log(
+						`${(contador + '.').green} ${desc} :: ${
+							completadoEn === null ? `${'Pendiente'}`.red : `${completadoEn}`.green
+						}`
+					);
+				}
+			} else {
+				if (!completadoEn) {
+					contador += 1;
+					console.log(
+						`${(contador + '.').green} ${desc} :: ${
+							completadoEn === null ? `${'Pendiente'}`.red : `${'Completada'}`.green
+						}`
+					);
+				}
+			}
 		});
 	}
 }
